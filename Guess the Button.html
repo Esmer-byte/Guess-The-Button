@@ -38,19 +38,22 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
       <script>
          var max = -1;
+         var arr = [];
          function startGame() {
            var nr = $('#task').val();
-           while(nr > 0){
+           while(arr.length < nr){
              var idButton = Math.floor(Math.random() * (nr + 10) + 1);
-             if(max < idButton)  {
-               max = idButton;
-             }
-             $('#list').append(`
+             if(arr.indexOf(idButton) === -1) {
+              arr.push(idButton);
+               if(max < idButton)  {
+                 max = idButton;
+               }
+               $('#list').append(`
                <div class = "card-body">
                <button type="button" class="btn btn-primary btn-lg" onclick="return checkValue(` + idButton + `);" id="` + idButton + `"><i class="las la-question-circle"></i></button>
                </div>
                `);
-             nr--;
+             }
            }        
            return false;
          }
