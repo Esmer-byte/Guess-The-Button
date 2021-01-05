@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <title>Guess The Button</title>
+  </head>
+  <body>
+    <div class="container">
+      
+      <div class="card">
+        <div class="card-header">
+          <h5>Can you guess the button?</h5>
+        </div>
+        <div class="card-body">
+            <form>
+        <div class="mb-3">
+          <label>Number of buttons</label>
+          <input type="text" class="form-control" id="task">
+          <div id="emailHelp" class="form-text">Play with as many as you want!</div>
+        </div>
+        <button type="submit" class="btn btn-success" onclick="return startGame();">Add</button>
+          <div class = "card-body">
+            <div class = "card-body">
+            <div id = "list">
+              </div>
+            </div>
+          </div>  
+       </form>
+      </div>
+     </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script>
+      var max = -1;
+      function startGame() {
+        var nr = $('#task').val();
+        while(nr > 0){
+          var idButton = Math.floor(Math.random() * (nr + 10) + 1);
+          if(max < idButton)  {
+            max = idButton;
+          }
+          $('#list').append(`
+            <div class = "card-body">
+            <button type="button" class="btn btn-primary btn-lg" onclick="return checkValue(` + idButton + `);" id="` + idButton + `"><i class="las la-question-circle"></i></button>
+            </div>
+            `);
+          nr--;
+        }        
+        return false;
+      }
+      function checkValue(winner) {
+        if(winner == max) {
+          alert("You won!");
+        } else {
+          alert("You lost!");
+        }
+        return false;
+      }
+      
+    </script>
+  </body>
+</html>
